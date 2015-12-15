@@ -1,10 +1,9 @@
 <html>
     <head>
         <meta charset='utf-8'>
-        <head><%= title %></head>
+        <title><%= title %>-测试页面</title>
     </head>
     <body>
         <p><%= title %></p>
-        <%- include('part.tpl', { title: 'Simon' }) %>
     </body>
 </html>

@@ -23,13 +23,16 @@ var Packer = {
         this.fs.writeJSON( this.destinationPath('package.json'),pkg );
         //拷贝.gitignore
         this.copy( this.templatePath('.gitignore') , this.destinationPath('.gitignore') );
+        //拷贝webpack.config.js
+        this.fs.copyTpl( this.templatePath('webpack.config.js'),this.destinationPath('webpack.config.js') );
         //拷贝src目录: index.jsx & widgets目录
-        this.mkdir( this.destinationPath('src/widgets') );
+        this.fs.copyTpl( this.templatePath('index.js'),this.destinationPath('src/index.js') );
         //拷贝demo文件夹:
-        this.fs.copyTpl( this.templatePath('index.tpl'),this.destinationPath('demo/index.html'),
-            {title:this.pkg.name}
-        );
+        this.fs.copyTpl( this.templatePath('demo/index.tpl'),this.destinationPath('demo/index.html'),{ title:this.pkg.name});
 
+    },
+    end:function(){
+        this.log( chalk.blue('脚手架build完成') );
     },
     /**
      * 校验当前目录是否已经初始化脚手架
@@ -59,14 +62,12 @@ var Packer = {
                 type    : 'input',
                 name    : 'name',
                 message : ['组件名称（默认为',this.appname,'）:'].join(''),
-                default : this.appname,
-                store : true
+                default : this.appname
             },{
                 type    : 'input',
                 name    : 'version',
                 message : '版本号(默认为1.0.0)',
-                default : '1.0.0',
-                store : true
+                default : '1.0.0'
             }
         ], function (props) {
             this.pkg = props;
