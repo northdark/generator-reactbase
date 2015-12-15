@@ -1,0 +1,8 @@
+.DS_Store
+.git/
+.idea/
+peaches/
+*.iml
+node_modules/
+npm-debug.log
+.clam/
