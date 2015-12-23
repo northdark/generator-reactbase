@@ -6,9 +6,9 @@ var generators = require('yeoman-generator');
 
 var Packer = {
     initializing:function(){
-        this.log( chalk.blue('脚手架build构建开始') );
+        this.log( chalk.blue('@yo-reactbase:脚手架build构建开始') );
         if( this._checkExist() ){
-            this.log( chalk.red('当前目录已经存在文件结构') );
+            this.log( chalk.red('@yo-reactbase:当前目录已经存在文件结构') );
         }
     },
     prompting:function(){
@@ -26,13 +26,13 @@ var Packer = {
         //拷贝webpack.config.js
         this.fs.copyTpl( this.templatePath('webpack.config.js'),this.destinationPath('webpack.config.js') );
         //拷贝src目录: index.jsx & widgets目录
-        this.fs.copyTpl( this.templatePath('index.js'),this.destinationPath('src/index.js') );
+        this.fs.copyTpl( this.templatePath('src/index.js'),this.destinationPath('src/index.js') );
         //拷贝demo文件夹:
-        this.fs.copyTpl( this.templatePath('demo/index.tpl'),this.destinationPath('demo/index.html'),{ title:this.pkg.name});
+        this.fs.copyTpl( this.templatePath('demo/index.tpl'),this.destinationPath('demo/index.html'),{title:this.pkg.name});
 
     },
     end:function(){
-        this.log( chalk.blue('脚手架build完成') );
+        this.log( chalk.blue('@yo-reactbase:脚手架build完成') );
     },
     /**
      * 校验当前目录是否已经初始化脚手架
@@ -73,6 +73,12 @@ var Packer = {
             this.pkg = props;
             done();
         }.bind(this));
+    },
+    end:function(){
+        this.log( chalk.blue('@yo-reactbase:执行npm install') );
+        this.installDependencies({
+            skipInstall: this.options['skip-install']
+        });
     }
 };
 

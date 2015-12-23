@@ -11,13 +11,13 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/ },
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'}//,
-            //{ test: /\.css$/, loader: "style!css" },
-            //{test: /\.less/,loader: 'style-loader!css-loader!less-loader'}
+            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+            { test: /\.css$/, loader: "style-loader!css-loader" },
+            {test: /\.less/,loader: 'style-loader!css-loader!less-loader'}
         ]
     },
     resolve:{
-        extensions:['','.js','.json','.jsx']
+        extensions:['','.js','.jsx']
     },
     plugins: [
         new webpack.NoErrorsPlugin()
